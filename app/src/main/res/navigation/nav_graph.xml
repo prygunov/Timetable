@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="net.artux.timetablekotlin.ui.main.DaysFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_days">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -19,7 +19,7 @@
         android:id="@+id/SecondFragment"
         android:name="net.artux.timetablekotlin.ui.main.TaskFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_task">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
@@ -35,6 +35,10 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="net.artux.timetablekotlin.ChatFragment"
-        android:label="fragment_chat_list"
-        tools:layout="@layout/fragment_chat_list" />
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="task_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

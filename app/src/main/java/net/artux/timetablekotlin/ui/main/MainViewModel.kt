@@ -1,6 +1,5 @@
 package net.artux.timetablekotlin.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
@@ -10,16 +9,16 @@ import kotlinx.coroutines.withContext
 import net.artux.timetablekotlin.data.Result
 import net.artux.timetablekotlin.data.TimeTableRepository
 import net.artux.timetablekotlin.data.main.Day
+import net.artux.timetablekotlin.data.model.Occupation
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainViewModel (private val timetableRepository: TimeTableRepository, val dateFormat: SimpleDateFormat) : ViewModel() {
 
     val listResult = MutableLiveData<List<Day>>()
-    val taskData = MutableLiveData<String>()
+    val occupationData = MutableLiveData<Occupation>()
     private val cal = Calendar.getInstance()
 
     init {
@@ -34,7 +33,7 @@ class MainViewModel (private val timetableRepository: TimeTableRepository, val d
         MainScope().launch {
             val result = withContext(Dispatchers.IO) {
 
-                cal.set(Calendar.DAY_OF_WEEK, cal.firstDayOfWeek);
+                cal.set(Calendar.DAY_OF_WEEK, cal.firstDayOfWeek)
                 val start: String = dateFormat.format(cal.time)
 
                 cal.add(Calendar.WEEK_OF_YEAR, 1)
@@ -44,7 +43,7 @@ class MainViewModel (private val timetableRepository: TimeTableRepository, val d
 
                 return@withContext timetableRepository.getDays(start, end)
             }
-            listResult.value = result;
+            listResult.value = result
         }
     }
 
@@ -61,16 +60,12 @@ class MainViewModel (private val timetableRepository: TimeTableRepository, val d
     fun getTask(id:String){
         MainScope().launch {
             val result = withContext(Dispatchers.IO) {
-                return@withContext timetableRepository.getTask(id)
+                return@withContext timetableRepository.getOccupation(id)
             }
+
+
             if (result is Result.Success){
-                val doc: Document = Jsoup.parse(result.data)
-                val element = doc.getElementsByClass("distance-learning-view").first()
-
-                element.select("div.menu-btns").remove()
-                element.select("div.chat-page chat-page--dialog-opened").remove()
-
-                taskData.value = element.html()
+                occupationData.value = result.data
             }
         }
     }

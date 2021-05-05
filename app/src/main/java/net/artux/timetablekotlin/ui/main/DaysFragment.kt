@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import net.artux.timetablekotlin.R
-import net.artux.timetablekotlin.databinding.FragmentFirstBinding
+import net.artux.timetablekotlin.databinding.FragmentDaysBinding
 import net.artux.timetablekotlin.ui.login.ViewModelsFactory
 
 /**
@@ -19,14 +19,14 @@ import net.artux.timetablekotlin.ui.login.ViewModelsFactory
 class DaysFragment : Fragment() {
 
     lateinit var viewModel:MainViewModel
-    lateinit var firstBinding:FragmentFirstBinding
+    lateinit var daysBinding: FragmentDaysBinding
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        firstBinding = FragmentFirstBinding.inflate(inflater)
+        daysBinding = FragmentDaysBinding.inflate(inflater)
         // Inflate the layout for this fragment
-        return firstBinding.root;
+        return daysBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class DaysFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity(), ViewModelsFactory()).get(MainViewModel::class.java)
 
         val daysAdapter = DaysAdapter(emptyList(), viewModel.dateFormat)
-        firstBinding.daysList.adapter = daysAdapter;
+        daysBinding.daysList.adapter = daysAdapter
 
         view.findViewById<Button>(R.id.button_next).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -50,8 +50,8 @@ class DaysFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
         }
 
-        firstBinding.buttonNext.setOnClickListener { viewModel.nextWeek() }
-        firstBinding.buttonPrevious.setOnClickListener { viewModel.previousWeek() }
+        daysBinding.buttonNext.setOnClickListener { viewModel.nextWeek() }
+        daysBinding.buttonPrevious.setOnClickListener { viewModel.previousWeek() }
 
         viewModel.getTimetable()
     }

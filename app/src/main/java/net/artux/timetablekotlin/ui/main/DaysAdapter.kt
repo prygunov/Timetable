@@ -3,27 +3,23 @@ package net.artux.timetablekotlin.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.core.text.HtmlCompat.fromHtml
 import androidx.recyclerview.widget.RecyclerView
 import net.artux.timetablekotlin.R
 import net.artux.timetablekotlin.data.main.Day
-import net.artux.timetablekotlin.data.model.Task
-import java.text.ParseException
+import net.artux.timetablekotlin.data.model.OccupationItem
 import java.text.SimpleDateFormat
-import java.util.*
 
 class DaysAdapter(
     var list:List<Day>,
     var dateFormat: SimpleDateFormat) : RecyclerView.Adapter<DaysAdapter.DayHolder>() {
 
-    var onItemClick: ((Task?) -> Unit)? = null
+    var onItemClick: ((OccupationItem?) -> Unit)? = null
 
     fun update(list: List<Day>){
-        this.list = list;
+        this.list = list
         notifyDataSetChanged()
     }
 
@@ -50,7 +46,7 @@ class DaysAdapter(
         return 0
     }
 
-    private fun getTask(position: Int): Task? {
+    private fun getTask(position: Int): OccupationItem? {
         var i = 0
 
         for (day in list){
@@ -98,7 +94,7 @@ class DaysAdapter(
 
         init {
             itemView.setOnClickListener {
-                onItemClick?.invoke(getTask(adapterPosition))
+                onItemClick?.invoke(getTask(bindingAdapterPosition))
             }
         }
 
