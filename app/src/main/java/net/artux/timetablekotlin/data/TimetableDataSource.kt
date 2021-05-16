@@ -37,9 +37,7 @@ class TimetableDataSource {
             try {
                 val htmlOccupation = SSTUApiProvider.api.getOccupation(id).execute().body()
 
-                println("Occupation $id")
                 if (htmlOccupation!=null && it.isActive){
-                    println("Occupation not null")
                     val htmlSite: String = htmlOccupation.string()
                     val doc = Jsoup.parse(htmlSite)
                     val values = doc.select("td")
@@ -77,7 +75,8 @@ class TimetableDataSource {
                             }
                             block.hasAttr("ng-init") -> {
                                 val taskId = block.attr("ng-init").substringAfter("(").substringBefore(")")
-                                val desc = block.html().substringAfter("\">").substringBefore("<!--")
+                                println("block: ${block.html()}")
+                                val desc = block.html().substringAfter("</h2>").substringBefore("<table")
                                 val decisions = getDecisions(taskId)
                                 if (decisions is Result.Success){
                                     val task = Task(desc, decisions.data)
