@@ -14,10 +14,9 @@
     tools:listitem="@layout/chat_item">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/inputContainer" />
 
@@ -29,18 +28,23 @@
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_margin="4dp"/>
 
         <ImageButton
+            android:id="@+id/updateButton"
+            android:src="@drawable/ic_action_update"
             android:layout_weight="8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"/>
 
         <ImageButton
+            android:id="@+id/sendButton"
+            android:src="@drawable/ic_action_send"
             android:layout_weight="8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

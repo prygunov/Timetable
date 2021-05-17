@@ -1,6 +1,7 @@
-package net.artux.timetablekotlin.data
+package net.artux.timetablekotlin.data.login
 
 import net.artux.timetablekotlin.data.model.LoggedInUser
+import net.artux.timetablekotlin.data.model.Result
 
 /**
  * Class that requests authentication and user information from the remote data source and

@@ -6,16 +6,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.artux.timetablekotlin.data.MessagesRepository
-import net.artux.timetablekotlin.data.Result
-import net.artux.timetablekotlin.data.TimeTableRepository
-import net.artux.timetablekotlin.data.model.Day
+import net.artux.timetablekotlin.data.messages.MessagesRepository
+import net.artux.timetablekotlin.data.model.Result
 import net.artux.timetablekotlin.data.model.Message
-import java.text.SimpleDateFormat
 
 class ChatViewModel (private val messagesRepository: MessagesRepository) : ViewModel() {
 
     val listResult = MutableLiveData<List<Message>>()
+    var messageSent = MutableLiveData<Boolean>()
 
     fun getMessages(id:String){
         MainScope().launch {
@@ -26,6 +24,16 @@ class ChatViewModel (private val messagesRepository: MessagesRepository) : ViewM
             if (result is Result.Success){
                 listResult.value = result.data
             }
+        }
+    }
+
+    fun sendMessage(dlId: String, spId: String, text: String){
+        MainScope().launch {
+            val result = withContext(Dispatchers.IO) {
+                return@withContext messagesRepository.sendMessage(dlId, spId, text)
+            }
+
+            messageSent.value = result is Result.Success && result.data == 1
         }
     }
 

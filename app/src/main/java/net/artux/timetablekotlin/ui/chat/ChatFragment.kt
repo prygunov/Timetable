@@ -1,15 +1,17 @@
 package net.artux.timetablekotlin.ui.chat
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import net.artux.timetablekotlin.databinding.FragmentChatBinding
 import net.artux.timetablekotlin.ui.login.ViewModelsFactory
-import net.artux.timetablekotlin.ui.main.MainViewModel
+
 
 /**
  * A fragment representing a list of Items.
@@ -41,17 +43,49 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var adapter = MessageRecyclerViewAdapter(emptyList())
-        chatBinding.recycleView.adapter = adapter
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.stackFromEnd = true
+        chatBinding.recyclerView.layoutManager = layoutManager
+        chatBinding.recyclerView.adapter = adapter
+
+
 
         chatViewModel.listResult.observe(requireActivity(), Observer {
             adapter.updateMessages(it)
+            if (adapter.itemCount!=0)
+                chatBinding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1);
         })
-        arguments?.getString("task_id")?.let {
-            chatViewModel.getMessages(it)
+        chatViewModel.messageSent.observe(requireActivity(), Observer {
+            if (it){
+                chatBinding.inputText.setText("")
+                update()
+            }else
+                Toast
+                    .makeText(requireContext(), "Не удалось отправить", Toast.LENGTH_SHORT)
+                    .show();
+        })
+
+        chatBinding.updateButton.setOnClickListener {
+            update()
+        }
+        chatBinding.sendButton.setOnClickListener {
+            arguments?.let {
+                chatViewModel.sendMessage(it.getString("occupation_id").toString(),
+                    it.getString("student_id").toString(),
+                    chatBinding.inputText.text.toString())
+            }
+
         }
 
 
 
+        update()
+    }
+
+    private fun update(){
+        arguments?.getString("occupation_id")?.let {
+            chatViewModel.getMessages(it)
+        }
     }
 
     companion object {

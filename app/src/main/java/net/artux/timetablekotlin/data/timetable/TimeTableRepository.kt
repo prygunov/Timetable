@@ -1,6 +1,8 @@
-package net.artux.timetablekotlin.data
+package net.artux.timetablekotlin.data.timetable
 
 import net.artux.timetablekotlin.data.model.Day
+import net.artux.timetablekotlin.data.model.Result
+import net.artux.timetablekotlin.data.timetable.TimetableDataSource
 import java.text.SimpleDateFormat
 import java.util.*
 

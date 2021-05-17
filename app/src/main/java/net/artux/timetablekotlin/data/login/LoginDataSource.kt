@@ -1,12 +1,12 @@
-package net.artux.timetablekotlin.data
+package net.artux.timetablekotlin.data.login
 
-import android.util.Log
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.suspendCancellableCoroutine
+import net.artux.timetablekotlin.data.CookieRepository
+import net.artux.timetablekotlin.data.SSTUApiProvider
 import net.artux.timetablekotlin.data.model.LoggedInUser
+import net.artux.timetablekotlin.data.model.Result
 import java.io.IOException
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

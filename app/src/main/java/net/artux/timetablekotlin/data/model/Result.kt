@@ -1,4 +1,4 @@
-package net.artux.timetablekotlin.data
+package net.artux.timetablekotlin.data.model
 
 /**
  * A generic class that holds a value with its loading status.

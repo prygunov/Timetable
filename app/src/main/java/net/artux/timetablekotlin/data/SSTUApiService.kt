@@ -43,6 +43,16 @@ interface SSTUApiService {
             @Query("t_id") dl_id: String
     ): Call<List<Decision>>
 
+    @FormUrlEncoded
+    @POST("/distancelearning/distancelearningresults/create?dlp_id=0")
+    @Headers("X-CSRF-Token:LTVQQ2lTRXFvcyUUHCEfHx5eNRQGIQIhGwJpB1ARC0RJeT87XBh9XA==")
+    fun sendMessage(
+        @Query("dl_id") dl_id: String,
+        @Query("sp_id") sp_id: String,
+        @Field("DistanceLearningResults[Text]") text: String,
+        @Field("DistanceLearningResults[UploadStoredFile]") file: String,
+        @Field("tax_file") undefined: String
+    ): Call<Int>
 
     companion object Factory {
         fun create(): SSTUApiService {

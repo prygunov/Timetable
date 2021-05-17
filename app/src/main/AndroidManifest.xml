@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TimeTableKotlin">
+        android:theme="@style/Theme.TimeTableKotlin"
+        android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"

@@ -57,7 +57,8 @@ class TaskFragment : Fragment() {
         }
         taskBinding.chatButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("task_id", mainViewModel.getTaskId())
+            bundle.putString("occupation_id", mainViewModel.getOccupation()?.id)
+            bundle.putString("student_id", mainViewModel.getOccupation()?.studentId)
             findNavController().navigate(R.id.action_SecondFragment_to_chatFragment, bundle)
         }
     }

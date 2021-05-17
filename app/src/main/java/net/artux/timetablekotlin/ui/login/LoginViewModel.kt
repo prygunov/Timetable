@@ -8,11 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.artux.timetablekotlin.data.LoginRepository
-import net.artux.timetablekotlin.data.Result
+import net.artux.timetablekotlin.data.login.LoginRepository
+import net.artux.timetablekotlin.data.model.Result
 
 import net.artux.timetablekotlin.R
-import net.artux.timetablekotlin.data.SSTUApiProvider
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 

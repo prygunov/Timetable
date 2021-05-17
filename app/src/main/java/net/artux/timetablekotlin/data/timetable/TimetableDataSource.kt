@@ -1,12 +1,11 @@
-package net.artux.timetablekotlin.data
+package net.artux.timetablekotlin.data.timetable
 
-import android.text.Html
-import android.view.ViewGroup
-import android.widget.TextView
 import kotlinx.coroutines.suspendCancellableCoroutine
+import net.artux.timetablekotlin.data.SSTUApiProvider
 import net.artux.timetablekotlin.data.model.Decision
 import net.artux.timetablekotlin.data.model.Occupation
 import net.artux.timetablekotlin.data.model.OccupationItem
+import net.artux.timetablekotlin.data.model.Result
 import net.artux.timetablekotlin.data.model.Task
 import org.jsoup.Jsoup
 import java.io.IOException
@@ -23,7 +22,7 @@ class TimetableDataSource {
                 if (list!=null && it.isActive){
                     it.resume(Result.Success(list))
                 }else
-                    throw Exception("Can not get timetable")
+                    throw Exception("Can not get timetable $response" )
             } catch (e: Throwable) {
                 e.printStackTrace()
                 if (it.isActive)
@@ -61,8 +60,11 @@ class TimetableDataSource {
                         }
                         i++
                     }
-
-                    val occupation = Occupation(id, teacher, title, type, date, time, place, groups)
+                    val studentId = doc.select("div[ng-init]")
+                        .first().attr("ng-init")
+                        .substringAfter(", ")
+                        .substringBefore(")")
+                    val occupation = Occupation(id, studentId, teacher, title, type, date, time, place, groups)
 
                     val blocks = doc.select("div.grid-view")
 
@@ -77,7 +79,6 @@ class TimetableDataSource {
                                     map[texts[index]] = value.substringAfter("id")
                                 }
                                 occupation.links = map
-                                println(map)
                             }
                             block.hasAttr("ng-init") -> {
                                 val taskId = block.attr("ng-init").substringAfter("(").substringBefore(")")
