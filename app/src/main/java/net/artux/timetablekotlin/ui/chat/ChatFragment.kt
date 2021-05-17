@@ -41,7 +41,7 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        requireActivity().title = "Чат"
         var adapter = MessageRecyclerViewAdapter(emptyList())
         val layoutManager = LinearLayoutManager(context)
         layoutManager.stackFromEnd = true

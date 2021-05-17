@@ -34,6 +34,8 @@ class TaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainViewModel.occupationData.observe(requireActivity(), Observer {
+            if (isAdded)
+                requireActivity().title = it.title
             taskBinding.teacherView.text = it.teacher
             taskBinding.subjectView.text = it.title
             taskBinding.typeView.text = it.type
@@ -46,9 +48,22 @@ class TaskFragment : Fragment() {
                 taskBinding.descriptionContainer.visibility = View.VISIBLE
                 taskBinding.descriptionView.text = Html.fromHtml(it.description, Html.FROM_HTML_MODE_LEGACY)
             }
+            if(it.links!=null)
+            if (it.links!!.size!=0){
+                taskBinding.filesButton.visibility = View.VISIBLE
+                taskBinding.filesButton.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putBoolean("files", true)
+                    findNavController().navigate(R.id.action_SecondFragment_to_listFragment_files, bundle)
+                }
+            }
             val task = it.task
             if (task != null){
                 taskBinding.taskContainer.visibility = View.VISIBLE
+                taskBinding.resultsButton.visibility = View.VISIBLE
+                taskBinding.resultsButton.setOnClickListener {
+                    findNavController().navigate(R.id.action_SecondFragment_to_listFragment_results)
+                }
                 taskBinding.taskView.text = Html.fromHtml(task.description, Html.FROM_HTML_MODE_LEGACY)
             }
         })

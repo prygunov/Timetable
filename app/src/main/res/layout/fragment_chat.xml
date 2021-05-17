@@ -11,7 +11,7 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.chat.ChatFragment"
-    tools:listitem="@layout/chat_item">
+    tools:listitem="@layout/item_chat">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

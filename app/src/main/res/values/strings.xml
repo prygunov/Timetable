@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">TimeTableKotlin</string>
+    <string name="app_name">Личный кабинет</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="prompt_email">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="welcome">"Welcome "</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -13,8 +13,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">Следующая</string>
+    <string name="previous">Предыдущая</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
@@ -26,5 +26,7 @@
     <string name="taskPlace">Место проведения</string>
     <string name="taskGroups">Группы</string>
     <string name="taskContent">Содержание занятия</string>
-    <string name="taskChat">Чат с преподавателем</string>
+    <string name="taskChat">Чат</string>
+    <string name="files">Файлы</string>
+    <string name="results">Результаты</string>
 </resources>

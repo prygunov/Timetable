@@ -76,7 +76,7 @@ class TimetableDataSource {
                                 val hrefs = links.eachAttr("href")
                                 var map = HashMap<String, String>()
                                 for((index, value) in hrefs.iterator().withIndex()){
-                                    map[texts[index]] = value.substringAfter("id")
+                                    map[texts[index]] = value.substringAfter("id=")
                                 }
                                 occupation.links = map
                             }

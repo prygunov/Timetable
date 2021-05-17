@@ -31,6 +31,7 @@ class DaysFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().title = "Расписание Май"
         viewModel = ViewModelProvider(requireActivity(), ViewModelsFactory()).get(MainViewModel::class.java)
 
         val daysAdapter = DaysAdapter(emptyList(), viewModel.dateFormat)

@@ -1,12 +1,10 @@
-package net.artux.timetablekotlin.ui.chat
+package net.artux.timetablekotlin
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import net.artux.timetablekotlin.R
-import net.artux.timetablekotlin.data.model.Message
 
 import net.artux.timetablekotlin.dummy.DummyContent.DummyItem
 
@@ -14,34 +12,26 @@ import net.artux.timetablekotlin.dummy.DummyContent.DummyItem
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
-class MessageRecyclerViewAdapter(
-    var values: List<Message>
-) : RecyclerView.Adapter<MessageRecyclerViewAdapter.ViewHolder>() {
-
-
+class MyFileRecyclerViewAdapter(
+    private val values: HashMap<String, String>
+) : RecyclerView.Adapter<MyFileRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_chat, parent, false)
+            .inflate(R.layout.item_file, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.titleView.text = "${item.Date}, ${item.Fio}"
-        holder.contentView.text = item.Text
-    }
-
-    fun updateMessages(list:List<Message>){
-        values = list
-        notifyDataSetChanged()
+        holder.idView.text = values.keys.elementAt(position)
+        holder.contentView.text = values.values.elementAt(position)
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleView: TextView = view.findViewById(R.id.chat_item_title)
-        val contentView: TextView = view.findViewById(R.id.chat_item_content)
+        val idView: TextView = view.findViewById(R.id.filename)
+        val contentView: TextView = view.findViewById(R.id.id)
 
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
