@@ -8,7 +8,7 @@ import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.core.text.HtmlCompat.fromHtml
 import androidx.recyclerview.widget.RecyclerView
 import net.artux.timetablekotlin.R
-import net.artux.timetablekotlin.data.main.Day
+import net.artux.timetablekotlin.data.model.Day
 import net.artux.timetablekotlin.data.model.OccupationItem
 import java.text.SimpleDateFormat
 

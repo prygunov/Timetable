@@ -2,10 +2,8 @@ package net.artux.timetablekotlin.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import net.artux.timetablekotlin.data.LoginDataSource
-import net.artux.timetablekotlin.data.LoginRepository
-import net.artux.timetablekotlin.data.TimeTableRepository
-import net.artux.timetablekotlin.data.TimetableDataSource
+import net.artux.timetablekotlin.data.*
+import net.artux.timetablekotlin.ui.chat.ChatViewModel
 import net.artux.timetablekotlin.ui.main.MainViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,6 +25,8 @@ class ViewModelsFactory : ViewModelProvider.Factory {
                     timetableRepository = TimeTableRepository(dataSource = TimetableDataSource(), dateFormat = dateFormat),
                     dateFormat = dateFormat
             ) as T
+        }else if(modelClass.isAssignableFrom(ChatViewModel::class.java)){
+            return ChatViewModel(messagesRepository = MessagesRepository(MessagesDataSource())) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

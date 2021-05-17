@@ -8,10 +8,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.artux.timetablekotlin.data.Result
 import net.artux.timetablekotlin.data.TimeTableRepository
-import net.artux.timetablekotlin.data.main.Day
+import net.artux.timetablekotlin.data.model.Day
 import net.artux.timetablekotlin.data.model.Occupation
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -69,4 +67,6 @@ class MainViewModel (private val timetableRepository: TimeTableRepository, val d
             }
         }
     }
+
+    fun getTaskId() = occupationData.value?.id
 }

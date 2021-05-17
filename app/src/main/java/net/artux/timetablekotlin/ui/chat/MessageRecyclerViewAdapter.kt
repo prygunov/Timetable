@@ -1,10 +1,12 @@
-package net.artux.timetablekotlin
+package net.artux.timetablekotlin.ui.chat
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import net.artux.timetablekotlin.R
+import net.artux.timetablekotlin.data.model.Message
 
 import net.artux.timetablekotlin.dummy.DummyContent.DummyItem
 
@@ -13,8 +15,10 @@ import net.artux.timetablekotlin.dummy.DummyContent.DummyItem
  * TODO: Replace the implementation with code for your data type.
  */
 class MessageRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    var values: List<Message>
 ) : RecyclerView.Adapter<MessageRecyclerViewAdapter.ViewHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,15 +28,20 @@ class MessageRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.titleView.text = "${item.Date}, ${item.Fio}"
+        holder.contentView.text = item.Text
+    }
+
+    fun updateMessages(list:List<Message>){
+        values = list
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
-        val contentView: TextView = view.findViewById(R.id.content)
+        val titleView: TextView = view.findViewById(R.id.chat_item_title)
+        val contentView: TextView = view.findViewById(R.id.chat_item_content)
 
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"

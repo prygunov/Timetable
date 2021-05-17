@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import net.artux.timetablekotlin.R
 import net.artux.timetablekotlin.databinding.FragmentTaskBinding
 import net.artux.timetablekotlin.ui.login.ViewModelsFactory
 
@@ -49,11 +51,14 @@ class TaskFragment : Fragment() {
                 taskBinding.taskContainer.visibility = View.VISIBLE
                 taskBinding.taskView.text = Html.fromHtml(task.description, Html.FROM_HTML_MODE_LEGACY)
             }
-
-
         })
         arguments?.getString("task_id", "")?.let {
             mainViewModel.getTask(it)
+        }
+        taskBinding.chatButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("task_id", mainViewModel.getTaskId())
+            findNavController().navigate(R.id.action_SecondFragment_to_chatFragment, bundle)
         }
     }
 }

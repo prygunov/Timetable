@@ -1,4 +1,4 @@
-package net.artux.timetablekotlin.data.main
+package net.artux.timetablekotlin.data.model
 
 import net.artux.timetablekotlin.data.model.OccupationItem
 

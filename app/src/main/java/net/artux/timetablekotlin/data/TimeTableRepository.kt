@@ -1,7 +1,6 @@
 package net.artux.timetablekotlin.data
 
-import net.artux.timetablekotlin.data.main.Day
-import net.artux.timetablekotlin.data.model.Occupation
+import net.artux.timetablekotlin.data.model.Day
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +15,13 @@ class TimeTableRepository(val dataSource: TimetableDataSource, val dateFormat: S
 
             for (occupation in result.data) {
                 calendar.time = dateFormat.parse(occupation.start)
-                list.add(Day(calendar.get(Calendar.DAY_OF_MONTH), mutableListOf()))
+                list.add(
+                    Day(
+                        calendar.get(
+                            Calendar.DAY_OF_MONTH
+                        ), mutableListOf()
+                    )
+                )
             }
 
             for (occupation in result.data){

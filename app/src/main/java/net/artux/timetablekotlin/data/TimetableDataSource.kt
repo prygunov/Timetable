@@ -62,7 +62,7 @@ class TimetableDataSource {
                         i++
                     }
 
-                    val occupation = Occupation(teacher, title, type, date, time, place, groups)
+                    val occupation = Occupation(id, teacher, title, type, date, time, place, groups)
 
                     val blocks = doc.select("div.grid-view")
 
@@ -70,12 +70,17 @@ class TimetableDataSource {
                         when {
                             block.id() == "w1" -> {
                                 val links  = blocks.select("table.table.table-striped.table-bordered > tbody > tr > td > a")
+                                val texts = links.eachText()
                                 val hrefs = links.eachAttr("href")
-                                println(hrefs)
+                                var map = HashMap<String, String>()
+                                for((index, value) in hrefs.iterator().withIndex()){
+                                    map[texts[index]] = value.substringAfter("id")
+                                }
+                                occupation.links = map
+                                println(map)
                             }
                             block.hasAttr("ng-init") -> {
                                 val taskId = block.attr("ng-init").substringAfter("(").substringBefore(")")
-                                println("block: ${block.html()}")
                                 val desc = block.html().substringAfter("</h2>").substringBefore("<table")
                                 val decisions = getDecisions(taskId)
                                 if (decisions is Result.Success){

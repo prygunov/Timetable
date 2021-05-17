@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="net.artux.timetablekotlin.ChatFragment"
+        android:name="net.artux.timetablekotlin.ui.chat.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat">
         <argument

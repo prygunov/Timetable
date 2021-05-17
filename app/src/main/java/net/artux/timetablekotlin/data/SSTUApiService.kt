@@ -33,10 +33,9 @@ interface SSTUApiService {
 
     @GET("/api/common/distancelearningresults?dlp_id=0")
     @Headers("Referer:https://lk.samgtu.ru/distancelearning/distancelearning/index")
-
     fun getMessages(
         @Query("dl_id") dl_id: String
-    ): Call<List<Message>>
+    ): Call<MutableList<Message>>
 
     @GET("/api/common/distancelearningtaskresults")
     @Headers("Referer:https://lk.samgtu.ru/distancelearning/distancelearning/index")
